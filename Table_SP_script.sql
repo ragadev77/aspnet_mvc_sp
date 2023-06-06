@@ -13,6 +13,7 @@ CREATE TABLE development.dbo.produk (
 	CONSTRAINT PK__produk__3213E83FAA1A0C95 PRIMARY KEY (id)
 );
 GO
+
 --IF OBJECT_ID ( 'development.dob.produk_get', 'P' ) IS NOT NULL
 --    DROP PROCEDURE development.dob.produk_get;
 --GO
@@ -24,7 +25,7 @@ CREATE PROCEDURE dbo.produk_add
 AS
 	INSERT INTO dbo.produk(nama_barang, kode_barang, jumlah_barang, tanggal)
 	VALUES (@nama, @kode, @jumlah, @tgl);
-
+GO
 --IF OBJECT_ID ( 'development.dob.produk_get', 'P' ) IS NOT NULL
 --    DROP PROCEDURE development.dob.produk_get;
 --GO
@@ -51,15 +52,24 @@ AS
 		tanggal = @tgl
 	WHERE id = @id;
 GO
-
 CREATE PROCEDURE dbo.produk_get
-    @nama_barang NVARCHAR(200),
+	 @id int
+AS
+    SET NOCOUNT ON;
+    SELECT id, nama_barang, kode_barang, jumlah_barang, tanggal 
+    FROM development.dbo.produk p 
+    WHERE p.id = @id
+    ORDER BY p.nama_barang;
+GO
+CREATE PROCEDURE dbo.produk_search
+    @nama_barang NVARCHAR(200) = null,
     @kode_barang NVARCHAR(50) = null
 AS
     SET NOCOUNT ON;
     SELECT id, nama_barang, kode_barang, jumlah_barang, tanggal 
     FROM development.dbo.produk p 
     WHERE 
-    (p.nama_barang IS NULL or LOWER(p.nama_barang) like LOWER('%'+@nama_barang+'%'))
-    ORDER BY p.nama_barang;
+    (p.nama_barang IS NULL OR LOWER(p.nama_barang) like LOWER('%'+@nama_barang+'%'))
+    	AND (p.kode_barang IS NULL OR LOWER(p.kode_barang) like LOWER('%'+@kode_barang+'%'))
+    ORDER BY p.nama_barang ;
 GO
