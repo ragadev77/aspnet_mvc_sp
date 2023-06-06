@@ -1,0 +1,53 @@
+﻿@model WebAPI.Models.Produk
+
+@{
+    ViewData["Title"] = "Delete Produk";
+}
+
+<h4>Delete Produk</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Delete">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="nama_barang" class="control-label"></label>
+                @Html.TextBoxFor(m => m.nama_barang, new {@readonly = "readonly", placeholder = "nama barang",@class = "form-control"})
+            </div>
+            <div class="form-group">
+                <label asp-for="kode_barang" class="control-label"></label>
+                @Html.TextBoxFor(m => m.kode_barang, new {@readonly = "readonly",placeholder = "kode barang",@class = "form-control"})
+            </div>
+            <div class="form-group">
+                <label asp-for="jumlah_barang" class="control-label"></label>
+                @Html.TextBoxFor(m => m.jumlah_barang, new {@readonly = "readonly",placeholder = "jumlah",@class = "form-control"})
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Confirm Delete" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@{
+    try
+    {
+        if (ViewBag.msg != null)
+        {
+            <div class="form-group">
+                            <label style="color:darkred;">@ViewBag.msg</label>
+            </div>
+        }
+    }
+    catch
+    {
+        
+    }
+}
+<div class="form-group">
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,9 @@
+.vs/
+WebAPI/.vs/
+WebAPI/bin/
+WebAPI/obj/
+WebApp/.vs/
+WebApp/bin/
+WebApp/obj/
+ConsoleAppTest/bin/
+ConsoleAppTest/obj/

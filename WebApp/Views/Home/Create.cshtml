@@ -1,0 +1,61 @@
+﻿@model WebAPI.Models.Produk
+
+@{
+    ViewData["Title"] = "Add New Produk";
+}
+
+<h4>Add Produk</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="nama_barang" class="control-label"></label>
+                @Html.TextBoxFor(m => m.nama_barang, new {placeholder = "input nama barang",@class = "form-control"})
+                <span asp-validation-for="nama_barang" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="kode_barang" class="control-label"></label>
+                @Html.TextBoxFor(m => m.kode_barang, new {placeholder = "input kode barang",@class = "form-control"})
+                <span asp-validation-for="kode_barang" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="tanggal" class="control-label"></label>
+                <input asp-for="tanggal" class="form-control" />
+                <span asp-validation-for="tanggal" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="jumlah_barang" class="control-label"></label>
+                @Html.TextBoxFor(m => m.jumlah_barang, new {placeholder = "input stok",@class = "form-control"})
+                <span asp-validation-for="jumlah_barang" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@{
+    try
+    {
+        if (ViewBag.msg != null)
+        {
+            <div class="form-group">
+                <label style="color:purple;">@ViewBag.msg</label>
+            </div>
+        }
+    }
+    catch
+    {
+        
+    }
+}
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

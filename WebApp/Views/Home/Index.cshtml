@@ -1,0 +1,61 @@
+﻿@model IEnumerable<WebAPI.Models.Produk>
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Produk</title>
+</head>
+<body>
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+@*<div class="form-group">
+    <input type="text" class="form form-control" placeholder="search by nama / kode barang" />
+    <input type="submit" value="Search" class="btn btn-primary" />
+</div>
+*@<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.nama_barang)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.kode_barang)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.jumlah_barang)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.tanggal)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.nama_barang)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.kode_barang)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.jumlah_barang)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.tanggal)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.id })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+</body>
+</html>
